@@ -1,0 +1,8 @@
+{
+  "name": "dmalewski",
+  "version": "v1.0.0",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.2"
+  }
+}
