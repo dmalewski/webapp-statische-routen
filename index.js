@@ -1,12 +1,19 @@
 console.log('Hello World');
 
-const express = require('express');
+const express = require('express')
+
+const bodyparser = require('body-parser');
 
 const fetchTweets = require('./lib/services/twitter');
+
+// {} explizit die Funktion rausholen
+const { persistMail } = require('./lib/services/persister');
 
 const app = express();
 
 app.use(express.static('./assets'));
+
+app.use(bodyparser.urlencoded({extended: true}));
 
 app.set('view engine','ejs');
 
@@ -40,6 +47,34 @@ app.get('/tweets', (req, res) => {
              });
         });
 
+});
+
+app.get('/contact', (req, res) => {
+    res.render('pages/contact',{
+        title: 'Kontakt',
+        headline: 'Send me some feedback!'
+    });
+});
+
+//für die Formular Absendung
+app.post('/contact', (req, res) => {
+
+    const author = req.body.author;
+    const message = req.body.message;
+
+    persistMail(author, message)
+        .then(() => {
+              res.render('pages/thanks', {
+                title: `Thank you, ${author}!`,
+                headline: `Thanks, ${author}!`,
+                subheadline: 'Awesome, your message is stored!'
+             });
+        })
+        .catch((err) => {
+            console.error(err);
+
+            res.send('Autsch" Hat nicht geklappt.');
+        });
 });
 
 app.listen(8080, (err) => {

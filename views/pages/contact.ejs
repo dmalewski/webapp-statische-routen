@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+        <head>
+            <% include ../partials/head %>
+        </head>
+
+        <body>
+             <% include ../partials/navigation %>
+
+            <h1><%= headline %></h1>
+
+            <form action="/contact" method="POST">
+                <div>
+                    <label for="author">Your name</label><br/>
+                    <input name="author" type="text">
+                </div>
+
+                <div>
+                    <label for="message">Your message</label><br/>
+                    <textarea name="message" cols="60" rows="10"></textarea>
+                </div>
+
+                 <input type="submit" value="Send">
+            </form>
+        </body>
+<html>
