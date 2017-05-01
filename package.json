@@ -2,8 +2,10 @@
   "name": "dmalewski",
   "version": "v1.0.0",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
+    "mongodb": "^2.2.26",
     "request": "^2.81.0",
     "request-promise": "^4.2.0"
   }
