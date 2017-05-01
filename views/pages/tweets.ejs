@@ -9,6 +9,17 @@
 
             <h1><%= headline %></h1>
 
+            <ul>
+                <% tweets.forEach(function (tweet) { %>
+                    <li>
+                        <img src="<%= tweet.user.avatar %>">
+                        <%= tweet.text %>
+                        <p><%= tweet.user.name %></p>
+                        <p><a href="https://twitter.com/<%= tweet.user.nick %>">@<%= tweet.user.nick %></a></p>
+                    </li>
+                <% }) %>
+            </ul>
+
             <footer>
                 The tweets are fetched from the <a href="https://twitter.com">Twitter</a> API
             </footer>
