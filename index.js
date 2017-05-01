@@ -2,6 +2,8 @@ console.log('Hello World');
 
 const express = require('express');
 
+const fetchTweets = require('./lib/services/twitter');
+
 const app = express();
 
 app.use(express.static('./assets'));
@@ -24,10 +26,20 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/tweets', (req, res) => {
-    res.render('pages/tweets', {
-        title: 'Tweets',
-        headline: 'My tweets'
-    })
+
+    const query = req.query.searchTerm || 'Node.js';
+
+    fetchTweets(query)
+        .then((tweets) => {
+           // console.log(tweets);
+
+             res.render('pages/tweets', {
+               title: 'Tweets',
+               headline: 'My tweets',
+               tweets,
+             });
+        });
+
 });
 
 app.listen(8080, (err) => {
